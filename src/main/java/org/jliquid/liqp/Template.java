@@ -180,7 +180,7 @@ public class Template {
      */
     public String toStringAST() {
 
-        StringBuilder builder = new StringBuilder();
+        LimitedStringBuilder builder = new LimitedStringBuilder();
 
         walk(root, builder);
 
@@ -195,10 +195,10 @@ public class Template {
      * a single white space character.
      *
      * @param tree the (sub) tree.
-     * @param builder the StringBuilder to fill.
+     * @param builder the LimitedStringBuilder to fill.
      */
     @SuppressWarnings("unchecked")
-    private void walk(CommonTree tree, StringBuilder builder) {
+    private void walk(CommonTree tree, LimitedStringBuilder builder) {
 
         List<CommonTree> firstStack = new ArrayList<CommonTree>();
         firstStack.add(tree);

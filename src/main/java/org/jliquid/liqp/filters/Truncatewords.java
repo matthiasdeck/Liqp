@@ -1,5 +1,7 @@
 package org.jliquid.liqp.filters;
 
+import org.jliquid.liqp.LimitedStringBuilder;
+
 class Truncatewords extends Filter {
 
     /*
@@ -36,7 +38,7 @@ class Truncatewords extends Filter {
 
     private String join(String[] words, int length) {
 
-        StringBuilder builder = new StringBuilder();
+        LimitedStringBuilder builder = new LimitedStringBuilder();
 
         for (int i = 0; i < length; i++) {
             builder.append(words[i]).append(" ");

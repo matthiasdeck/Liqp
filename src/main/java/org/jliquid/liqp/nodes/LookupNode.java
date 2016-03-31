@@ -1,5 +1,7 @@
 package org.jliquid.liqp.nodes;
 
+import org.jliquid.liqp.LimitedStringBuilder;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -163,7 +165,7 @@ class LookupNode implements LNode {
     @Override
     public String toString() {
 
-        StringBuilder builder = new StringBuilder();
+        LimitedStringBuilder builder = new LimitedStringBuilder();
 
         builder.append(id);
 

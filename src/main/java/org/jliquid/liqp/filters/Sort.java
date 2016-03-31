@@ -1,6 +1,11 @@
 package org.jliquid.liqp.filters;
 
-import java.util.*;
+import org.jliquid.liqp.LimitedStringBuilder;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 class Sort extends Filter {
 
@@ -73,7 +78,7 @@ class Sort extends Filter {
 
         @Override
         public String toString() {
-            StringBuilder builder = new StringBuilder();
+            LimitedStringBuilder builder = new LimitedStringBuilder();
 
             for (java.util.Map.Entry entry : super.entrySet()) {
                 builder.append(entry.getKey()).append(entry.getValue());

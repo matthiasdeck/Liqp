@@ -1,5 +1,7 @@
 package org.jliquid.liqp.filters;
 
+import org.jliquid.liqp.LimitedStringBuilder;
+
 class Join extends Filter {
 
     /*
@@ -14,7 +16,7 @@ class Join extends Filter {
             return "";
         }
 
-        StringBuilder builder = new StringBuilder();
+        LimitedStringBuilder builder = new LimitedStringBuilder();
 
         Object[] array = super.asArray(value);
         String glue = params.length == 0 ? " " : super.asString(super.get(0, params));

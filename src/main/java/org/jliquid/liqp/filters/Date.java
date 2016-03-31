@@ -1,5 +1,7 @@
 package org.jliquid.liqp.filters;
 
+import org.jliquid.liqp.LimitedStringBuilder;
+
 import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.Locale;
@@ -79,7 +81,7 @@ class Date extends Filter {
             final java.util.Calendar calendar = java.util.Calendar.getInstance();
             calendar.setTime(date);
 
-            StringBuilder builder = new StringBuilder();
+            LimitedStringBuilder builder = new LimitedStringBuilder();
 
             for (int i = 0; i < format.length(); i++) {
 

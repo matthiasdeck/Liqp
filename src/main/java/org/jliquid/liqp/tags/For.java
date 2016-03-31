@@ -1,10 +1,11 @@
 package org.jliquid.liqp.tags;
 
-import java.util.List;
+import org.jliquid.liqp.LimitedStringBuilder;
 import org.jliquid.liqp.nodes.BlockNode;
 import org.jliquid.liqp.nodes.LNode;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 class For extends Tag {
@@ -62,7 +63,7 @@ class For extends Tag {
 
     private Object renderArray(String id, Map<String, Object> context, LNode... tokens) {
 
-        StringBuilder builder = new StringBuilder();
+        LimitedStringBuilder builder = new LimitedStringBuilder();
 
         // attributes start from index 5
         Map<String, Integer> attributes = getAttributes(5, context, tokens);
@@ -153,7 +154,7 @@ class For extends Tag {
 
     private Object renderRange(String id, Map<String, Object> context, LNode... tokens) {
 
-        StringBuilder builder = new StringBuilder();
+        LimitedStringBuilder builder = new LimitedStringBuilder();
 
         // attributes start from index 5
         Map<String, Integer> attributes = getAttributes(5, context, tokens);
