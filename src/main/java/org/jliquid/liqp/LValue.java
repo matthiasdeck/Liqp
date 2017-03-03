@@ -158,7 +158,7 @@ public abstract class LValue {
 
         Object[] array = this.asArray(value);
 
-        StringBuilder builder = new StringBuilder();
+        LimitedStringBuilder builder = new LimitedStringBuilder();
 
         for (Object obj : array) {
             builder.append(this.asString(obj));

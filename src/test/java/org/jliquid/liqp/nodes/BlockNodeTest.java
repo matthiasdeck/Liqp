@@ -1,12 +1,14 @@
 package org.jliquid.liqp.nodes;
 
-import java.util.Map;
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.tree.CommonTree;
+import org.jliquid.liqp.LimitedStringBuilder;
 import org.jliquid.liqp.Template;
 import org.jliquid.liqp.parser.LiquidLexer;
 import org.jliquid.liqp.tags.Tag;
-import org.antlr.runtime.RecognitionException;
-import org.antlr.runtime.tree.CommonTree;
 import org.junit.Test;
+
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -15,7 +17,7 @@ public class BlockNodeTest {
 
     private static String getChildText(CommonTree tree) {
 
-        StringBuilder builder = new StringBuilder();
+        LimitedStringBuilder builder = new LimitedStringBuilder();
 
         for (int i = 0; i < tree.getChildCount(); i++) {
             builder.append(tree.getChild(i).getText());

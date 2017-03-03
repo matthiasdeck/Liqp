@@ -1,10 +1,11 @@
 package org.jliquid.liqp.tags;
 
-import java.util.List;
+import org.jliquid.liqp.LimitedStringBuilder;
 import org.jliquid.liqp.nodes.BlockNode;
 import org.jliquid.liqp.nodes.LNode;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 class For extends Tag {
@@ -45,18 +46,24 @@ class For extends Tag {
 
         String id = super.asString(nodes[1].render(context));
 
+        //store existing for loop context if it exists, will be null otherwise. We need this for nested for loops.
+        Object originalForLoopContext = context.get(FORLOOP);
+
+        //put new forloop context for this loop
         context.put(FORLOOP, new HashMap<String, Object>());
 
         Object rendered = array ? renderArray(id, context, nodes) : renderRange(id, context, nodes);
 
+        //remove current forloop context, put back outer/parent forloop context if it exists
         context.remove(FORLOOP);
+        if(originalForLoopContext != null) context.put(FORLOOP, originalForLoopContext);
 
         return rendered;
     }
 
     private Object renderArray(String id, Map<String, Object> context, LNode... tokens) {
 
-        StringBuilder builder = new StringBuilder();
+        LimitedStringBuilder builder = new LimitedStringBuilder();
 
         // attributes start from index 5
         Map<String, Integer> attributes = getAttributes(5, context, tokens);
@@ -64,7 +71,13 @@ class For extends Tag {
         int offset = attributes.get(OFFSET);
         int limit = attributes.get(LIMIT);
 
-        Object[] array = super.asArray(tokens[2].render(context));
+        Object renderedObj = tokens[2].render(context);
+        Object[] array;
+        if(renderedObj instanceof Map){
+            array = ((Map)(renderedObj)).entrySet().toArray();
+        }else{
+            array = super.asArray(renderedObj);
+        }
 
         LNode block = tokens[3];
         LNode blockIfEmptyOrNull = tokens[4];
@@ -141,7 +154,7 @@ class For extends Tag {
 
     private Object renderRange(String id, Map<String, Object> context, LNode... tokens) {
 
-        StringBuilder builder = new StringBuilder();
+        LimitedStringBuilder builder = new LimitedStringBuilder();
 
         // attributes start from index 5
         Map<String, Integer> attributes = getAttributes(5, context, tokens);

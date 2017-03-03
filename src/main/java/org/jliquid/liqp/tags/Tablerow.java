@@ -1,5 +1,6 @@
 package org.jliquid.liqp.tags;
 
+import org.jliquid.liqp.LimitedStringBuilder;
 import org.jliquid.liqp.nodes.LNode;
 
 import java.util.HashMap;
@@ -56,7 +57,7 @@ class Tablerow extends Tag {
 
         context.put(TABLEROWLOOP, tablerowloopContext);
 
-        StringBuilder builder = new StringBuilder();
+        LimitedStringBuilder builder = new LimitedStringBuilder();
 
         int total = Math.min(collection.length, limit);
 

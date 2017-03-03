@@ -1,0 +1,27 @@
+apply plugin: 'java'
+apply plugin: 'antlr'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'src/generated/java'
+        }
+    }
+}
+
+dependencies {
+    antlr "org.antlr:antlr:3.4"
+    compile group: 'org.antlr', name: 'antlr', version: '3.4'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.8.3'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.3'
+    compile group: 'org.jsoup', name: 'jsoup', version: '1.8.3'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+generateGrammarSource {
+    outputDirectory = file("${projectDir}/src/generated/java")
+}

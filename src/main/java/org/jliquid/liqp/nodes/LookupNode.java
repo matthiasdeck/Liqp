@@ -1,5 +1,7 @@
 package org.jliquid.liqp.nodes;
 
+import org.jliquid.liqp.LimitedStringBuilder;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -129,6 +131,15 @@ class LookupNode implements LNode {
                     return ((Object[]) value)[index];
                 } else if (value instanceof List) {
                     return ((List<?>) value).get(index);
+
+                } else if(value instanceof Map.Entry){
+                    if (index == 0){
+                        return ((Map.Entry)value).getKey();
+                    }else if (index == 1){
+                        return ((Map.Entry)value).getValue();
+                    }else{
+                        return null;
+                    }
                 } else {
                     return null;
                 }
@@ -154,7 +165,7 @@ class LookupNode implements LNode {
     @Override
     public String toString() {
 
-        StringBuilder builder = new StringBuilder();
+        LimitedStringBuilder builder = new LimitedStringBuilder();
 
         builder.append(id);
 
